@@ -22,14 +22,14 @@ persistent database.
 
 ## Tech Stack
 
-| Layer      | Choice                                        |
-| ---------- | --------------------------------------------- |
-| Frontend   | Next.js 16 (App Router) + React 19            |
-| Language   | TypeScript (strict)                           |
-| Styling    | Tailwind CSS v4                               |
-| Backend    | Next.js route handlers (`src/app/api`)        |
-| Database   | Supabase (Postgres) with Row Level Security   |
-| Deployment | Vercel — _TBD_                                |
+| Layer      | Choice                                      |
+| ---------- | ------------------------------------------- |
+| Frontend   | Next.js 16 (App Router) + React 19          |
+| Language   | TypeScript (strict)                         |
+| Styling    | Tailwind CSS v4                             |
+| Backend    | Next.js route handlers (`src/app/api`)      |
+| Database   | Supabase (Postgres) with Row Level Security |
+| Deployment | Vercel — _TBD_                              |
 
 ## Getting Started
 
@@ -55,11 +55,11 @@ pnpm format       # Prettier
 
 Copy `.env.example` to `.env.local`. Variables prefixed with `NEXT_PUBLIC_` are exposed to the browser; others are strictly **server-only**.
 
-| Variable                 | Description                                |
-| ------------------------ | ------------------------------------------ |
-| `SUPABASE_URL`           | Your Supabase project URL                  |
-| `SUPABASE_ANON_KEY`      | Project `anon` public key (Settings → API) |
-| `NEXT_PUBLIC_SITE_URL`   | Base URL for SEO/Open Graph (e.g., `http://localhost:3000`) |
+| Variable                               | Description                                                 |
+| -------------------------------------- | ----------------------------------------------------------- |
+| `NEXT_PUBLIC_SUPABASE_URL`             | Your Supabase project URL                                   |
+| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Project anon/publishable key (Settings → API)               |
+| `NEXT_PUBLIC_SITE_URL`                 | Base URL for SEO/Open Graph (e.g., `http://localhost:3000`) |
 
 ## Database Setup
 
@@ -99,13 +99,13 @@ RSVP rows are insert-only (never displayed publicly); wishes are public read + i
 - **Single Next.js app for frontend + API.** The backend surface is two small features (RSVP, wishes), so route handlers keep everything in one deployable unit without the overhead of a separate service.
 - **Supabase Postgres.** A real, persistent database with a generous free tier; RLS policies enforce that anonymous visitors can only do exactly what the product allows.
 - **Server-side validation as the source of truth.** Client validation exists purely for fast UX; every request is re-validated in the route handler.
-- **Feature-Based Architecture.** Domain logic is strictly isolated inside `src/features/*` to ensure a clean separation of concerns, encapsulating components, data fetching, and types per feature.
+- **Feature Module Organization.** Feature logic is consolidated inside `src/features/landing` encapsulating all invitation sections, forms (RSVP, wishes), hooks, and types.
 
 ## Project Structure
 
 ```text
 src/app/            # routes, layouts, API route handlers
-src/features/       # isolated domain logic (rsvp, wishes)
+src/features/       # feature logic (landing: cover, couple, rsvp, wishes, etc.)
 src/components/     # global UI components (shadcn/ui) & layouts
 src/lib/            # global utilities, supabase client, seo
 public/assets/      # Invitato asset pack (assessment-only)
@@ -114,12 +114,14 @@ docs/               # PRD.md, MVP.md, DESIGN.md
 
 ## AI Tools Disclosure
 
-In accordance with the assessment guidelines, AI coding tools/agents were utilized during the development of this project to accelerate implementation. 
+In accordance with the assessment guidelines, AI coding tools/agents were utilized during the development of this project to accelerate implementation.
 
 **Tools Used:**
+
 - Agentic AI Terminal / LLM Assistants
 
 **Scope of AI Usage:**
+
 - Assisting in translating the initial brief into structured PRD and MVP documents.
 - Scaffolding boilerplate code (React components, basic layouts).
 - Generating CSS variables based on extracted Chakra UI computed styles.
@@ -127,6 +129,7 @@ In accordance with the assessment guidelines, AI coding tools/agents were utiliz
 
 **Engineering Ownership & Judgment:**
 While AI assisted in code generation, all core technical and architectural decisions were strictly driven and reviewed by me, including:
+
 1. **System Architecture:** Opting for Next.js Route Handlers as a monolith backend over a separate server for deployment velocity.
 2. **Database & Security:** Designing the Supabase Postgres schema and applying Row Level Security (RLS) allowing anonymous inserts but restricting reads.
 3. **Code Organization:** Enforcing a Feature-Based Architecture (`src/features/`) to ensure scalability and separation of concerns.

@@ -10,11 +10,12 @@ sources:
 
 ## Creative North Star
 
-**Modern, Elegant, & Minimalist Romance.** 
+**Modern, Elegant, & Minimalist Romance.**
 The visual identity of this invitation relies on subtle elegance. It uses a muted, cool-toned color palette (silver-greys and deep slate blues) paired with classic serif typography. The design feels premium, quiet, and timeless. There are no loud colors or harsh contrast lines.
 
 **Dual Typography Register:**
 The design balances two distinct voices:
+
 1. **The Classic Serif:** `Marcellus` (headings) and `Cormorant Upright` (body) provide a structured, formal, and highly readable foundation.
 2. **The Romantic Script:** `Boheme Floral` acts as an accent (specifically for the "&" symbol and subtle decorative headers), breaking the rigidity of the serifs with a soft, hand-drawn touch.
 
@@ -35,22 +36,22 @@ All fonts will be loaded via `next/font/google` or `next/font/local` to ensure z
 
 Extracted directly from the Chakra UI root variables of the reference template. These will be mapped to Tailwind CSS variables in `globals.css`.
 
-| Token Name | Hex Code | Tailwind Variable | Role |
-| :--- | :--- | :--- | :--- |
-| **Background Primary** | `#D5DADE` | `--bg-primary` | Main background color (soft silver-grey). |
-| **Background Secondary**| `#737373` | `--bg-secondary` | Muted background for secondary sections. |
-| **Background Alt** | `#FFFFFF` | `--bg-alt` | White surfaces (cards, form backgrounds). |
-| **Overlay Opacity** | `#323030` | `--bg-overlay` | Dark overlay for modals or hero backgrounds. |
-| **Main Text** | `#2C3F4E` | `--text-main` | Primary reading text (deep slate blue). |
-| **Secondary Text** | `#737373` | `--text-muted` | Subtle text, dates, or captions. |
-| **Alternative Text** | `#FEFEFE` | `--text-alt` | Text on dark backgrounds or primary buttons. |
-| **Main Asset/Accent** | `#2C3F4E` | `--color-accent` | Primary buttons, icons, and active states. |
+| Token Name               | Hex Code  | Tailwind Variable | Role                                         |
+| :----------------------- | :-------- | :---------------- | :------------------------------------------- |
+| **Background Primary**   | `#D5DADE` | `--bg-primary`    | Main background color (soft silver-grey).    |
+| **Background Secondary** | `#737373` | `--bg-secondary`  | Muted background for secondary sections.     |
+| **Background Alt**       | `#FFFFFF` | `--bg-alt`        | White surfaces (cards, form backgrounds).    |
+| **Overlay Opacity**      | `#323030` | `--bg-overlay`    | Dark overlay for modals or hero backgrounds. |
+| **Main Text**            | `#2C3F4E` | `--text-main`     | Primary reading text (deep slate blue).      |
+| **Secondary Text**       | `#737373` | `--text-muted`    | Subtle text, dates, or captions.             |
+| **Alternative Text**     | `#FEFEFE` | `--text-alt`      | Text on dark backgrounds or primary buttons. |
+| **Main Asset/Accent**    | `#2C3F4E` | `--color-accent`  | Primary buttons, icons, and active states.   |
 
 ## Layout & Elevation
 
 - **Container:** Mobile-first design. On desktop, the content should be constrained to a mobile-sized wrapper (e.g., `max-w-md mx-auto`) to emulate the digital invitation experience, sitting on top of a blurred or solid primary background.
 - **Elevation:** Flat by default. Use extremely subtle shadows (`shadow-sm` or `shadow-md` with low opacity) only for floating action buttons (like the music player) or overlapping cards (like the event details).
-- **Border Radius:** 
+- **Border Radius:**
   - `rounded-none` or `rounded-sm` for structural elements.
   - `rounded-full` for icon buttons (music toggle) and pill-shaped CTAs.
 
@@ -70,13 +71,15 @@ We will use `shadcn/ui` installed over Tailwind v4, strictly styled to match the
 
 ## Dos and Don'ts
 
-### DO 
+### DO
+
 - **Do keep it mobile-constrained:** Even on wide desktop screens, the main invitation content should sit inside a centered, mobile-width container (e.g., `max-w-md` or `max-w-lg`).
 - **Do respect readability:** Always use `Cormorant Upright` for long-form text, dates, venue addresses, and form inputs.
 - **Do embrace whitespace:** Let elements breathe. Use generous padding and margins to maintain the elegant, uncluttered feel.
 - **Do make animations cinematic:** Use slow, graceful ease-out transitions (`duration-700` or `duration-1000`) for entrance effects.
 
 ### DON'T
+
 - **Don't use script fonts for reading:** Never use `Boheme Floral` (or alternative script font) for paragraphs, important dates, or buttons. It is strictly a decorative accent.
 - **Don't use bouncy or snappy motion:** Avoid spring animations or fast transitions. They break the calm, romantic mood.
 - **Don't over-shadow:** Avoid heavy, dark drop shadows. If depth is needed, use flat layers or extremely transparent, soft shadows.

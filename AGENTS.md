@@ -47,7 +47,7 @@ Run `pnpm type-check` and `pnpm lint` before considering any task done.
 
 ```
 src/app/            # App Router routes, global styles, layouts
-src/features/       # Feature-based architecture (rsvp, wishes, etc.)
+src/features/       # Feature module (landing)
 src/components/     # Global components (ui, layout, shared)
 src/lib/            # Global utilities, db clients (supabase), seo
 public/assets/      # Invitato asset pack (photos, music) — assessment-only
@@ -57,8 +57,8 @@ docs/               # PRD.md, MVP.md
 ## Conventions
 
 - **Naming Convention:** MUST use strict `kebab-case` for all files and directories (e.g., `form-wishes.tsx`, `use-submit-rsvp.ts`).
-- **Feature-Based Architecture:** Domain logic MUST be isolated inside `src/features/{domain}/` (e.g., `src/features/rsvp/`, `src/features/wishes/`).
-  - Each feature houses its own `components/`, `api/` (data fetching/actions), `hooks/`, `lib/`, and `types.ts`.
+- **Feature-Based Architecture:** Domain logic is organized inside `src/features/landing/`.
+  - Houses its own `components/`, `api/` (data fetching/actions), `hooks/`, `lib/`, and `types.ts`.
 - **Global Components:** Generic UI components (buttons, inputs) and layouts belong in `src/components/ui/` or `src/components/layout/`.
 - **Server First:** Server Components by default; add `"use client"` only when a component truly needs it (interactivity, hooks).
 - **Validation:** Validation lives on the server; client-side checks are UX only.

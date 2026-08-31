@@ -26,17 +26,17 @@ Deadline: **Maximum 1–2 days** from brief receipt (received 2026-08-31). Prior
 
 A single public page (scrollable) with the section order following the Ricky + Felly reference. Final order to be confirmed during implementation by observing the reference template:
 
-| # | Section | Content | Notes |
-|---|---------|---------|-------|
-| 1 | Cover / Opening | Couple photo/names, date, "Open Invitation" button | Full-screen overlay; entrance transition when clicked |
-| 2 | Hero + Countdown | Couple names, event date, countdown to event day | Real-time countdown (ticking seconds) |
-| 3 | Couple | Bride & Groom profiles + photos | From asset pack |
-| 4 | Event Info | Ceremony & Reception: day/date, time, venue | Two event cards |
-| 5 | Gallery | Photo grid/carousel | Asset pack, modern-futuristic mood |
-| 6 | RSVP | Attendance confirmation form | See §4.1 |
-| 7 | Wishes | Submit wish form + wishes list | See §4.2 |
-| 8 | Maps / Location | Venue map + "Open in Google Maps" button | Google Maps embed |
-| 9 | Closing / Footer | Closing remark, credits | — |
+| #   | Section          | Content                                            | Notes                                                 |
+| --- | ---------------- | -------------------------------------------------- | ----------------------------------------------------- |
+| 1   | Cover / Opening  | Couple photo/names, date, "Open Invitation" button | Full-screen overlay; entrance transition when clicked |
+| 2   | Hero + Countdown | Couple names, event date, countdown to event day   | Real-time countdown (ticking seconds)                 |
+| 3   | Couple           | Bride & Groom profiles + photos                    | From asset pack                                       |
+| 4   | Event Info       | Ceremony & Reception: day/date, time, venue        | Two event cards                                       |
+| 5   | Gallery          | Photo grid/carousel                                | Asset pack, modern-futuristic mood                    |
+| 6   | RSVP             | Attendance confirmation form                       | See §4.1                                              |
+| 7   | Wishes           | Submit wish form + wishes list                     | See §4.2                                              |
+| 8   | Maps / Location  | Venue map + "Open in Google Maps" button           | Google Maps embed                                     |
+| 9   | Closing / Footer | Closing remark, credits                            | —                                                     |
 
 Global Elements:
 
@@ -49,11 +49,11 @@ Global Elements:
 
 ### 4.1 RSVP / Guest Confirmation Form
 
-| Field | Description | Validation |
-|-------|-------------|------------|
-| Guest Name | Name of the person RSVPing | Required, 1–100 characters after trim |
-| Attendance Status | Radio/select: **Attending** / **Not attending** | Required |
-| Party Size | Number of people attending | Integer 1–10; relevant if "Attending" |
+| Field             | Description                                     | Validation                            |
+| ----------------- | ----------------------------------------------- | ------------------------------------- |
+| Guest Name        | Name of the person RSVPing                      | Required, 1–100 characters after trim |
+| Attendance Status | Radio/select: **Attending** / **Not attending** | Required                              |
+| Party Size        | Number of people attending                      | Integer 1–10; relevant if "Attending" |
 
 Behavior:
 
@@ -63,9 +63,9 @@ Behavior:
 
 ### 4.2 Wishes Form
 
-| Field | Description | Validation |
-|-------|-------------|------------|
-| Name | Sender's name | Required, 1–100 characters after trim |
+| Field   | Description      | Validation                            |
+| ------- | ---------------- | ------------------------------------- |
+| Name    | Sender's name    | Required, 1–100 characters after trim |
 | Message | The wish/message | Required, 1–500 characters after trim |
 
 Behavior:
@@ -134,14 +134,14 @@ Access (RLS, no auth): `anon` role can INSERT to both `rsvps` and `wishes`. `ano
 
 ## 9. Assumptions & Decisions
 
-| Decision | Choice | Rationale |
-|----------|--------|-----------|
-| Framework | Next.js 16 (App Router) + React 19 + TypeScript | Scaffolded in repo; React+TS is a "plus" in the brief |
-| Styling | Tailwind CSS v4 | Scaffolded in repo |
-| Backend | Next.js Route Handlers (Monolith) | Short deadline; sufficient for 2 endpoints |
-| Database | Supabase Postgres (Free Tier) | Real persistence, free, easy Vercel deployment |
-| Deployment | Vercel (TBD) | Natural fit for Next.js; finalize during implementation |
-| Doc Language | All internal docs and README in English | Universal readability, token efficiency for AI agents |
+| Decision     | Choice                                          | Rationale                                               |
+| ------------ | ----------------------------------------------- | ------------------------------------------------------- |
+| Framework    | Next.js 16 (App Router) + React 19 + TypeScript | Scaffolded in repo; React+TS is a "plus" in the brief   |
+| Styling      | Tailwind CSS v4                                 | Scaffolded in repo                                      |
+| Backend      | Next.js Route Handlers (Monolith)               | Short deadline; sufficient for 2 endpoints              |
+| Database     | Supabase Postgres (Free Tier)                   | Real persistence, free, easy Vercel deployment          |
+| Deployment   | Vercel (TBD)                                    | Natural fit for Next.js; finalize during implementation |
+| Doc Language | All internal docs and README in English         | Universal readability, token efficiency for AI agents   |
 
 Assumptions to confirm during implementation:
 

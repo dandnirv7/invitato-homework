@@ -8,6 +8,7 @@
 All mandatory scope items from the brief. Check off only when verified working, not just written.
 
 ### Pages & Visuals
+
 - [ ] Single-page public invitation, mobile + desktop responsive
 - [ ] Opening/cover with "Open Invitation" button + entrance transition
 - [ ] Event information section (ceremony & reception)
@@ -17,30 +18,36 @@ All mandatory scope items from the brief. Check off only when verified working, 
 - [ ] Transition animations between sections, respecting `prefers-reduced-motion`
 
 ### Interactive Features
+
 - [ ] Background music from the asset pack + mute/play toggle
 - [ ] Real-time countdown to the event day (finished state if passed)
 
 ### RSVP
+
 - [ ] RSVP Form: guest name, attendance status (Attending/Not attending), party size
 - [ ] Client + server validation; field-level error messages
 - [ ] Data persistently stored in the database (verified in Supabase)
 
 ### Wishes
+
 - [ ] Wishes Form: name + message; client + server validation
 - [ ] Visitors can submit new wishes
 - [ ] Visitors can view submitted wishes (loaded from DB, persistent on refresh)
 
 ### Backend
+
 - [ ] API route handlers: POST RSVP, POST wish, GET wishes
 - [ ] Supabase Database + RLS (public insert; public read for wishes; private read for RSVP)
 - [ ] Basic error handling for submission flows (validation failure, network failure)
 
 ### SEO & Metadata (WhatsApp Preview Focus)
+
 - [ ] Metadata Title & Description in Root Layout
 - [ ] Open Graph Image (OG Image) connected to Cover Photo (`cover-portrait.png`)
 - [ ] JSON-LD Event Schema (Configured via `src/lib/seo/schemas.ts`)
 
 ### Assets Mapping (Based on PRD Guidelines)
+
 - [ ] `cover-portrait.png`: Front page photo (Mandatory for OG Image / WhatsApp SEO)
 - [ ] `welcoming-portrait.png`: Welcoming section photo
 - [ ] `bride.png` & `groom.png`: Bride & Groom profiles (Landscape)
@@ -51,6 +58,7 @@ All mandatory scope items from the brief. Check off only when verified working, 
 - [ ] `welcoming-background.jpg`: Texture pattern for the Welcoming section (Square 1:1)
 
 ### Documentation & Delivery
+
 - [ ] Comprehensive README: local setup, architecture/technical decisions, env + DB setup, AI disclosure
 - [ ] `.env.example` + SQL database setup documented
 - [ ] GitHub Repo ready to submit (clean, no secrets, no junk files)

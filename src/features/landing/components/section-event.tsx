@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useInvitation } from "../i18n/invitation-provider";
 import { wedding } from "../lib/wedding-data";
+import { EntranceQrCode } from "./entrance-qr-code";
 import { Reveal } from "./reveal";
 import { templateButtonClass } from "./template-button";
 
@@ -10,7 +11,8 @@ const timeClass =
   "font-body text-[32px] leading-[48px] font-medium text-text-main";
 const venueClass =
   "font-body text-[19px] leading-[28.5px] font-bold text-text-main";
-const addressClass = "font-body text-[19px] leading-[28.5px] font-medium text-text-main";
+const addressClass =
+  "font-body text-[19px] leading-[28.5px] font-medium text-text-main";
 
 function EventBlock({
   label,
@@ -35,17 +37,6 @@ function EventBlock({
   );
 }
 
-/**
- * Section 4. Measured on the live reference (docs/CLONE-AUDIT-S4-S10.md):
- * h 1919.6 desktop / 1999.1 mobile, text column 425px (85% of the 500px column).
- * The two large element-free gaps (176px after the date block, 203px between the
- * two events) contain no element at all on the reference and are reproduced as
- * plain vertical spacing.
- *
- * The ticket renders Invitato's wordmark (`qr-code.png`), not a QR code: the
- * reference has no QR element anywhere in this section, which is what its own
- * footnote says.
- */
 export function SectionEvent() {
   const { t, guestName } = useInvitation();
   const card = wedding.accessCard;
@@ -55,29 +46,31 @@ export function SectionEvent() {
   return (
     <section
       id="wedding-details"
-      className="flex flex-col items-center bg-bg-primary pb-16 text-center"
+      className="bg-bg-primary flex flex-col items-center pb-16 text-center"
     >
       <Reveal className="flex w-[85%] flex-col items-center text-center">
-        <p className="mt-[46px] w-full font-body text-body leading-[28.5px] font-medium text-text-main">
+        <p className="font-body text-body text-text-main mt-[46px] w-full leading-[28.5px] font-medium">
           {t.event.intro}
         </p>
 
         <p className={`${labelClass} mt-[120px] w-full font-medium`}>
           {t.event.dateLabel}
         </p>
-        <p className="w-full font-body text-[33px] leading-[49.5px] font-bold text-text-main">
+        <p className="font-body text-text-main w-full text-[33px] leading-[49.5px] font-bold">
           {t.event.dateDay}
           <br />
           {t.weddingDate.slice(t.event.dateDay.length).trim()}
         </p>
 
+        <div className="bg-text-main/60 mx-auto mt-10 h-8 w-px" aria-hidden />
+
         <Image
-          src="/assets/wine.svg"
+          src="/assets/ring.svg"
           alt=""
           width={40}
           height={40}
           aria-hidden
-          className="mx-auto mt-[68px] h-10 w-10"
+          className="mx-auto mt-6 h-10 w-10"
         />
         <EventBlock
           className="mt-[68px]"
@@ -113,75 +106,79 @@ export function SectionEvent() {
         </a>
       </Reveal>
 
-      <Reveal className="mt-[102px] flex w-[321.3px] flex-col overflow-hidden rounded-[8px] bg-bg-alt shadow-lg">
-        <div className="relative h-[220px] w-full">
+      <Reveal className="mt-[90px] flex w-[335px] max-w-[92vw] flex-col overflow-hidden rounded-[16px] bg-white shadow-xl">
+        <div className="relative h-[225px] w-full">
           <Image
             src={card.cover}
-            alt=""
+            alt="Entrance Access Card Header"
             fill
-            sizes="322px"
+            sizes="335px"
             className="object-cover"
+            priority
           />
-          <div className="absolute inset-x-0 bottom-0 px-4 pb-9 text-left">
-            <p className="font-micro text-[10px] leading-[15px] font-bold tracking-wide text-white uppercase">
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
+
+          <div className="absolute inset-x-0 bottom-0 p-5 text-left text-white">
+            <p className="font-micro text-[11px] leading-[15px] font-bold tracking-[1.5px] uppercase">
               {t.event.cardTitle}
             </p>
-            <p className="mt-3 font-micro text-[16px] leading-[24px] font-bold text-white">
+            <p className="font-micro mt-2 text-[22px] leading-[26px] font-bold">
               {`${wedding.groom.short} & ${wedding.bride.short}`}
             </p>
-            <p className="mt-px font-micro text-[10px] leading-[15px] font-medium text-white">
+            <p className="font-micro mt-1 text-[13px] leading-[18px] font-medium text-white/95">
               {wedding.events.resepsi.venue}
             </p>
-            <p className="mt-px font-micro text-[10px] leading-[15px] font-medium text-white">
+            <p className="font-micro text-[13px] leading-[18px] font-medium text-white/95 italic">
               {t.weddingDate}
             </p>
           </div>
         </div>
 
-        <div className="flex items-start gap-3 px-4 pt-3 pb-5 text-right text-black">
-          <Image
-            src="/assets/qr-code.png"
-            alt=""
-            width={110}
-            height={110}
-            className="h-[110px] w-[110px] shrink-0"
-          />
-          <div className="flex flex-1 flex-col">
-          <p className="font-micro text-[10px] leading-[15px] font-normal">
-            {t.event.cardSalutation}
-          </p>
-          <p className="font-micro text-[14px] leading-[21px] font-bold">
-            {guest}
-          </p>
-          <p className="mt-2 font-micro text-[10px] leading-[15px] font-normal">
-            {t.event.cardInformation}
-          </p>
-          <p className="font-micro text-[12px] leading-[18px] font-bold">
-            {card.information}
-          </p>
-          <p className="font-micro text-[12px] leading-[18px] font-bold">
-            {t.event.cardValidFor}{" "}
-            <span className="text-[#A1425C]">{`(${card.seats})`}</span>{" "}
-            {t.event.cardPersons}
-          </p>
+        <div className="flex flex-col bg-white px-5 pt-5 pb-4">
+          <div className="flex items-center gap-4">
+            <div className="flex size-[124px] shrink-0 items-center justify-center rounded-[18px] border-2 border-neutral-900 bg-white p-2.5 shadow-xs">
+              <EntranceQrCode value={downloadHref} />
+            </div>
+
+            <div className="flex flex-1 flex-col justify-center text-left">
+              <p className="font-micro text-[11px] leading-[15px] font-normal text-neutral-600">
+                {t.event.cardSalutation}
+              </p>
+              <p className="font-micro mt-0.5 text-[18px] leading-[22px] font-bold text-neutral-950">
+                {guest}
+              </p>
+              <p className="font-micro mt-2.5 text-[11px] leading-[15px] font-normal text-neutral-600">
+                {t.event.cardInformation}
+              </p>
+              <p className="font-micro text-[14px] leading-[18px] font-bold text-neutral-950">
+                {card.information}
+              </p>
+              <p className="font-micro mt-0.5 text-[13px] leading-[18px] font-bold text-neutral-950">
+                {t.event.cardValidFor}{" "}
+                <span className="text-[#9D3E5B]">{`(${card.seats})`}</span>{" "}
+                {t.event.cardPersons}
+              </p>
+            </div>
           </div>
+
+          <p className="font-micro mt-4 text-center text-[11.5px] leading-[16px] text-neutral-600 italic">
+            {t.event.cardShowQr}
+          </p>
+        </div>
+
+        <div className="flex h-[48px] w-full items-center justify-center bg-[#63686D]">
+          <Image
+            src={card.logo}
+            alt="Invitato"
+            width={85}
+            height={28}
+            className="h-6 w-auto object-contain brightness-100"
+          />
         </div>
       </Reveal>
 
       <Reveal className="flex w-[85%] flex-col items-center text-center">
-        <p className="mt-4 w-[289.3px] font-micro text-[10px] leading-[15px] font-normal text-black">
-          {t.event.cardShowQr}
-        </p>
-
-        <Image
-          src={card.logo}
-          alt="Invitato"
-          width={85}
-          height={27.6}
-          className="mt-[18px] h-auto w-[85px]"
-        />
-
-        <p className="mt-7 w-full font-body text-[17px] leading-[25.5px] font-medium text-text-main">
+        <p className="font-body text-text-main mt-7 w-full max-w-[340px] text-[17px] leading-[25.5px] font-medium">
           {t.event.downloadTop}{" "}
           <b className="font-bold">{t.event.downloadBold}</b>{" "}
           {t.event.downloadBottom}
@@ -196,18 +193,18 @@ export function SectionEvent() {
           {t.event.downloadCta}
         </a>
 
-        <p className="w-full pt-3 font-body text-[17px] leading-[25.5px] font-bold text-text-main">
+        <p className="font-body text-text-main w-full pt-3 text-[17px] leading-[25.5px] font-bold">
           {t.event.qrNote}
         </p>
-            <Image
-        src="/assets/love-story-ornament.svg"
-        alt=""
-        width={24}
-        height={24}
-        aria-hidden
-        className="pointer-events-none absolute bottom-2 left-1/2 h-6 w-6 -translate-x-1/2"
-      />
-</Reveal>
+        <Image
+          src="/assets/love-story-ornament.svg"
+          alt=""
+          width={24}
+          height={24}
+          aria-hidden
+          className="pointer-events-none absolute bottom-2 left-1/2 h-6 w-6 -translate-x-1/2"
+        />
+      </Reveal>
     </section>
   );
 }

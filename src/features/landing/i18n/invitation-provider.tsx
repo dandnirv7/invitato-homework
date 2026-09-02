@@ -33,7 +33,11 @@ type Props = {
   children: ReactNode;
 };
 
-export function InvitationProvider({ initialLang, guestName, children }: Props) {
+export function InvitationProvider({
+  initialLang,
+  guestName,
+  children,
+}: Props) {
   const [lang, setLangState] = useState<Lang>(initialLang);
   const [opened, setOpened] = useState(false);
   const [playing, setPlaying] = useState(false);
@@ -43,9 +47,6 @@ export function InvitationProvider({ initialLang, guestName, children }: Props) 
     document.documentElement.lang = lang;
   }, [lang]);
 
-  // The reference rewrites ?lang= through the History API with no reload and keeps
-  // no language key in localStorage, so the server-rendered default stays authoritative
-  // on a fresh load.
   const setLang = useCallback((next: Lang) => {
     setLangState(next);
     const url = new URL(window.location.href);
@@ -56,8 +57,7 @@ export function InvitationProvider({ initialLang, guestName, children }: Props) 
   const startAudio = useCallback(() => {
     const audio = audioRef.current;
     if (!audio) return;
-    // Rejects only when the browser blocks playback; the call sits inside the
-    // cover's click handler, so a gesture is always present.
+
     audio.play().catch(() => setPlaying(false));
   }, []);
 

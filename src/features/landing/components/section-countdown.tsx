@@ -5,7 +5,6 @@ import { Fragment, useEffect, useState } from "react";
 import { useInvitation } from "../i18n/invitation-provider";
 import { wedding } from "../lib/wedding-data";
 import { Reveal } from "./reveal";
-import { templateButtonClass } from "./template-button";
 
 const TARGET_MS = wedding.akadEpoch * 1000;
 
@@ -26,39 +25,12 @@ function diff(): TimeLeft {
   };
 }
 
-/** Google Calendar expects UTC in `YYYYMMDDTHHMMSSZ`. */
-function calendarStamp(epochSeconds: number): string {
-  return new Date(epochSeconds * 1000)
-    .toISOString()
-    .replace(/[-:]/g, "")
-    .replace(/\.\d{3}/, "");
-}
-
-/**
- * Section 3. Dark band: #323030 with MRBL-RF-PW-36.jpg covering it and the curve
- * artwork overflowing above (measured 675x447.9 at x=-50, y=-53.3 on desktop).
- *   height   333.3 desktop / 260 mobile
- *   title    y=31.4 / 18.8   Marcellus 20px/400 lh20 #FEFEFE, not uppercase
- *   numerals y=81.4 / 50.8   Cormorant 54px/700 lh81 #FEFEFE; ":" separators 26px/700 lh39
- *   labels   y=162.4 / 131.8 Cormorant 17px/500 lh25.5 #FEFEFE
- *   button   y=269.9 / 209.3 h32, 18px/500 #FEFEFE on #2C3F4E, radius 5px
- * Each unit column STRETCHES, so a label measures exactly as wide as its numeral
- * ("Days" and "113" are both 57.1px). No tabular-nums: it widens the digits past the
- * reference's 57.1px. Row is centered; unit gap 12px desktop / 9px mobile.
- *
- * NOTE: the reference's "Remind Me" handler could not be observed (UNVERIFIED in
- * docs/CLONE-AUDIT.md §4). It is wired to a Google Calendar link as the conventional
- * behaviour; confirm against the reference before treating it as matched.
- */
 export function SectionCountdown() {
   const { t } = useInvitation();
-  // Null on the server so the first client paint cannot disagree with SSR markup.
   const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null);
 
   useEffect(() => {
     const tick = () => setTimeLeft(diff());
-    // Scheduled rather than called synchronously: the React Compiler flags a
-    // setState during the effect body as a cascading render.
     const first = window.setTimeout(tick, 0);
     const id = window.setInterval(tick, 1000);
     return () => {
@@ -73,13 +45,6 @@ export function SectionCountdown() {
     { key: "minutes", label: t.countdown.minutes, value: timeLeft?.minutes },
     { key: "seconds", label: t.countdown.seconds, value: timeLeft?.seconds },
   ];
-
-  const calendarHref =
-    "https://calendar.google.com/calendar/render?action=TEMPLATE" +
-    `&text=${encodeURIComponent(`The Wedding of ${wedding.groom.short} & ${wedding.bride.short}`)}` +
-    `&dates=${calendarStamp(wedding.akadEpoch)}/${calendarStamp(wedding.receptionEpoch)}` +
-    `&details=${encodeURIComponent(`${wedding.events.akad.venue} — ${wedding.events.resepsi.venue}`)}` +
-    `&location=${encodeURIComponent(wedding.events.resepsi.address)}`;
 
   return (
     <section
@@ -129,15 +94,6 @@ export function SectionCountdown() {
             </Fragment>
           ))}
         </div>
-
-        <a
-          href={calendarHref}
-          target="_blank"
-          rel="noreferrer noopener"
-          className={`${templateButtonClass} mt-[52px] md:mt-[82px]`}
-        >
-          {t.countdown.remind}
-        </a>
       </Reveal>
     </section>
   );

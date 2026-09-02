@@ -4,10 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { useInvitation } from "../i18n/invitation-provider";
 import type { Lang } from "../i18n/dictionary";
 
-/**
- * Reference: fixed pill, right:32px, bottom:16px at ≥768px and bottom:60px below,
- * z-index 99, background #737373, showing the active code plus a translate icon.
- */
 export function LanguageSwitcher() {
   const { lang, setLang, t } = useInvitation();
   const [open, setOpen] = useState(false);

@@ -1,20 +1,11 @@
-/**
- * Every string below is transcribed verbatim from the live reference
- * (scrape/live/audit/reference-copy.json, captured over CDP from
- * invitato.net/template-rickyfelly in both `en` and `?lang=id`).
- *
- * The reference leaves several strings in English on the Indonesian page —
- * "Love Story", "Counting the Days!", "A PORTRAIT OF", "Pre Wedding",
- * "Live Streaming", "RSVP", the footer credits and the QR footnote. Those are
- * reproduced identically in both branches rather than translated.
- */
 export const dictionary = {
   en: {
     theWeddingOf: "The Wedding of",
     salutation: "Dear Mr/Mrs/Ms",
     guestFallback: "Invitato",
     weddingDate: "Thursday, 26 December 2024",
-    verse: "I was sound asleep, but in my dreams I was wide awake. Oh, listen! It’s the sound of my lover knocking, calling!",
+    verse:
+      "I was sound asleep, but in my dreams I was wide awake. Oh, listen! It’s the sound of my lover knocking, calling!",
     verseSource: "Song of Songs 5:2 MSG",
     hashtag: "#RickyFellinlove",
     groomShort: "Ricky",
@@ -44,7 +35,8 @@ export const dictionary = {
     },
 
     event: {
-      intro: "Together with joyful hearts and the grace of God, we cordially request the honor of your presence at our wedding celebration:",
+      intro:
+        "Together with joyful hearts and the grace of God, we cordially request the honor of your presence at our wedding celebration:",
       dateLabel: "Date:",
       dateDay: "Thursday,",
       akadLabel: "Holy Matrimony:",
@@ -155,7 +147,8 @@ export const dictionary = {
     salutation: "Kepada Bapak/Ibu/Saudara/i",
     guestFallback: "Invitato",
     weddingDate: "Kamis, 26 Desember 2024",
-    verse: "Demikianlah mereka bukan lagi dua, melainkan satu. Karena itu, apa yang telah dipersatukan Allah, tidak boleh diceraikan manusia.",
+    verse:
+      "Demikianlah mereka bukan lagi dua, melainkan satu. Karena itu, apa yang telah dipersatukan Allah, tidak boleh diceraikan manusia.",
     verseSource: "Matius 19:6",
     hashtag: "#RickyFellinlove",
     groomShort: "Ricky",
@@ -185,7 +178,8 @@ export const dictionary = {
     },
 
     event: {
-      intro: "Dengan memohon anugerah dan berkat Tuhan, kami memohon kehadiran Bapak/Ibu/Saudara/i pada acara pernikahan kami:",
+      intro:
+        "Dengan memohon anugerah dan berkat Tuhan, kami memohon kehadiran Bapak/Ibu/Saudara/i pada acara pernikahan kami:",
       dateLabel: "Tanggal:",
       dateDay: "Kamis,",
       akadLabel: "Pemberkatan:",

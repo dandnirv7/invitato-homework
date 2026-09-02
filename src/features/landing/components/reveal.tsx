@@ -9,10 +9,6 @@ type Props = {
   delay?: number;
 };
 
-/**
- * Equivalent of the reference's react-reveal wrapper: a one-shot fade from
- * opacity 0 to 1 over 1000ms the first time the element enters the viewport.
- */
 export function Reveal({ children, className, delay = 0 }: Props) {
   const reduceMotion = useReducedMotion();
 

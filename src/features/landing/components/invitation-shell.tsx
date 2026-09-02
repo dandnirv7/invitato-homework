@@ -8,17 +8,6 @@ type Props = {
   children: ReactNode;
 };
 
-/**
- * Reference layout (measured, see scrape/live/audit/section0-probe.json):
- * - <768px      full-width single column
- * - 768–1279px  centered 500px column, no left backdrop
- * - >=1280px    split view: a fixed left panel (940px at a 1440 viewport) showing
- *               `desktop tb.jpeg` with a persistent cover title block, and the 500px
- *               invitation column pinned to the right edge.
- *
- * `right-[500px]` on a fixed element resolves against the viewport client box, so the
- * panel's right edge lands exactly on the column's left edge.
- */
 export function InvitationShell({ children }: Props) {
   const { t } = useInvitation();
 
@@ -26,7 +15,7 @@ export function InvitationShell({ children }: Props) {
     <>
       <div
         aria-hidden
-        className="fixed inset-y-0 left-0 right-[500px] z-[var(--z-backdrop)] hidden xl:block"
+        className="fixed inset-y-0 right-[500px] left-0 z-[var(--z-backdrop)] hidden xl:block"
       >
         <Image
           src="/assets/cover-desktop.jpeg"
@@ -38,29 +27,32 @@ export function InvitationShell({ children }: Props) {
         />
 
         <div className="relative h-full p-[42px]">
-          <p className="font-heading text-h5 leading-none text-text-main uppercase">
+          <p className="font-heading text-h5 text-text-main leading-none uppercase">
             {t.theWeddingOf}
           </p>
 
           <div className="mt-[28px] flex items-center">
-            <span className="font-heading text-[42px] leading-[42px] text-text-muted uppercase">
+            <span className="font-heading text-text-muted text-[42px] leading-[42px] uppercase">
               {t.groomShort}
             </span>
-            <span className="mt-[-20px] ml-[14px] mr-[20px] font-script text-[72px] leading-[86.4px] font-light text-text-muted">
+            <span className="font-script text-text-muted mt-[-20px] mr-[20px] ml-[14px] text-[72px] leading-[86.4px] font-light">
               and
             </span>
-            <span className="font-heading text-[42px] leading-[42px] text-text-muted uppercase">
+            <span className="font-heading text-text-muted text-[42px] leading-[42px] uppercase">
               {t.brideShort}
             </span>
           </div>
 
-          <p className="mt-[8px] max-w-[254px] font-body text-body leading-[28.5px] font-medium text-text-main">
+          <p className="font-body text-body text-text-main mt-[8px] max-w-[254px] leading-[28.5px] font-medium">
             {t.verse}
+          </p>
+          <p className="font-body text-body text-text-main mt-3 leading-[28.5px] font-medium">
+            &mdash; {t.verseSource}
           </p>
         </div>
       </div>
 
-      <div className="relative w-full bg-bg-primary shadow-2xl md:mx-auto md:w-[var(--column-width)] xl:mr-0 overflow-x-clip">
+      <div className="bg-bg-primary relative w-full overflow-x-clip shadow-2xl md:mx-auto md:w-[var(--column-width)] xl:mr-0">
         {children}
       </div>
     </>

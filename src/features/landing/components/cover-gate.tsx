@@ -4,11 +4,6 @@ import Image from "next/image";
 import { useInvitation } from "../i18n/invitation-provider";
 import { CoverArrow } from "./cover-arrow";
 
-/**
- * Pre-open state. The reference keeps `body { overflow: visible }` and simply does
- * not mount the invitation yet, so the document is exactly one viewport tall and
- * cannot scroll. Mounting the rest on open reproduces that without a scroll lock.
- */
 export function CoverGate() {
   const { t, open } = useInvitation();
 
@@ -23,20 +18,33 @@ export function CoverGate() {
         className="object-cover"
       />
 
-      <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
-        <p className="font-body text-small font-medium tracking-[0.2em] text-text-alt uppercase">
-          {t.theWeddingOf}
-        </p>
+      <Image
+        src="/assets/curve.svg"
+        alt=""
+        width={500}
+        height={332}
+        aria-hidden
+        className="pointer-events-none absolute -top-8 -right-8 z-[5] w-[500px] max-w-none opacity-90"
+      />
+      <Image
+        src="/assets/curve.svg"
+        alt=""
+        width={500}
+        height={332}
+        aria-hidden
+        className="pointer-events-none absolute -bottom-12 -left-8 z-[5] w-[500px] max-w-none rotate-180 opacity-80"
+      />
 
-        <h1 className="mt-4 flex flex-col items-center font-heading text-h1 leading-none text-text-alt">
+      <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
+        <h1 className="font-heading text-h1 text-text-alt flex flex-col items-center leading-none">
           <span>{t.groomShort}</span>
-          <span className="font-script text-and font-light leading-none normal-case">
+          <span className="font-script text-and leading-none font-light normal-case">
             and
           </span>
           <span>{t.brideShort}</span>
         </h1>
 
-        <p className="mt-6 font-body text-body font-medium text-text-alt">
+        <p className="font-body text-body text-text-alt mt-4 font-medium">
           {t.hashtag}
         </p>
       </div>

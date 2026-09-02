@@ -11,7 +11,12 @@ export async function generateMetadata({
   searchParams,
 }: Props): Promise<Metadata> {
   const resolvedParams = await searchParams;
-  const guestName = resolvedParams.to ? String(resolvedParams.to) : "";
+  const guestName =
+    typeof resolvedParams.to === "string" && resolvedParams.to
+      ? resolvedParams.to
+      : resolvedParams.code
+        ? "Invitato"
+        : "";
 
   if (!guestName) {
     return {};
@@ -30,7 +35,11 @@ export async function generateMetadata({
 export default async function LandingPage({ searchParams }: Props) {
   const resolvedParams = await searchParams;
   const guestName =
-    typeof resolvedParams.to === "string" ? resolvedParams.to : "";
+    typeof resolvedParams.to === "string" && resolvedParams.to
+      ? resolvedParams.to
+      : resolvedParams.code
+        ? "Invitato"
+        : "";
   const lang = resolveLang(resolvedParams.lang);
 
   return (

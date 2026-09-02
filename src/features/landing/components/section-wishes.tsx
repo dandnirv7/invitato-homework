@@ -32,16 +32,6 @@ function stamp(iso: string) {
   return `${day} | ${time}`;
 }
 
-/**
- * Section 9. Measured on the live reference: h 908.6 at both widths, bg #D5DADE,
- * content 400px wide, `curve.svg` 880 x 584 as a decorative overlay at y=403.7,
- * wish entries repeating on a 167.2px pitch (name 17px/700, message 16px/500,
- * timestamp 13.5px/400 #737373 as `13 Apr 2025 | 02:41 AM`).
- *
- * The reference's list is seeded vendor data. Per AGENTS.md this clone renders an
- * honest empty state backed by Supabase instead, so the section is shorter than
- * 908.6 until real wishes exist — a documented deliberate deviation.
- */
 export function SectionWishes() {
   const { t } = useInvitation();
   const [wishes, setWishes] = useState<Wish[]>([]);
@@ -78,7 +68,7 @@ export function SectionWishes() {
   }
 
   return (
-    <section className="relative flex flex-col items-center bg-bg-primary py-8">
+    <section className="bg-bg-primary relative flex flex-col items-center py-8">
       <Image
         src="/assets/curve.svg"
         alt=""
@@ -89,15 +79,18 @@ export function SectionWishes() {
       />
 
       <Reveal className="relative flex w-[80%] max-w-[400px] flex-col items-center">
-        <h2 className="w-full pb-2 text-center font-heading text-h1 leading-[32px] text-text-muted uppercase">
+        <h2 className="font-heading text-h1 text-text-muted w-full pb-2 text-center leading-[32px] uppercase">
           {t.wishes.title}
         </h2>
 
-        <p className="w-full pt-5 text-center font-body text-body leading-[28.5px] font-medium text-text-main">
+        <p className="font-body text-body text-text-main w-full pt-5 text-center leading-[28.5px] font-medium">
           {t.wishes.body}
         </p>
 
-        <form className="mt-[34px] w-full" onSubmit={form.handleSubmit(onSubmit)}>
+        <form
+          className="mt-[34px] w-full"
+          onSubmit={form.handleSubmit(onSubmit)}
+        >
           <label className={labelClass} htmlFor="wish-name">
             {`${t.wishes.nameLabel} :`}
           </label>
@@ -110,7 +103,10 @@ export function SectionWishes() {
             {...form.register("name")}
           />
 
-          <label className={`${labelClass} mt-[14px] block`} htmlFor="wish-message">
+          <label
+            className={`${labelClass} mt-[14px] block`}
+            htmlFor="wish-message"
+          >
             {t.wishes.messageLabel}
           </label>
           <textarea
@@ -131,7 +127,7 @@ export function SectionWishes() {
           {status === "ok" ? (
             <p
               role="status"
-              className="mt-4 w-full text-center font-body text-[17px] leading-[25.5px] font-medium text-text-main"
+              className="font-body text-text-main mt-4 w-full text-center text-[17px] leading-[25.5px] font-medium"
             >
               {t.wishes.success}
             </p>
@@ -139,7 +135,7 @@ export function SectionWishes() {
           {status === "error" ? (
             <p
               role="alert"
-              className="mt-4 w-full text-center font-body text-[17px] leading-[25.5px] font-medium text-[#A1425C]"
+              className="font-body mt-4 w-full text-center text-[17px] leading-[25.5px] font-medium text-[#A1425C]"
             >
               {t.wishes.failure}
             </p>
@@ -148,22 +144,22 @@ export function SectionWishes() {
 
         <ul className="mt-9 w-full">
           {wishes.length === 0 ? (
-            <li className="w-full py-6 text-center font-body text-body leading-[28.5px] font-medium text-text-muted">
+            <li className="font-body text-body text-text-muted w-full py-6 text-center leading-[28.5px] font-medium">
               {t.wishes.empty}
             </li>
           ) : (
             wishes.map((wish) => (
               <li
                 key={wish.id}
-                className="border-b border-line py-4 last:border-b-0"
+                className="border-line mb-4 flex flex-col gap-2 rounded-md border-b bg-white px-4 py-4 last:border-b-0"
               >
-                <p className="font-body text-[17px] leading-[25.5px] font-bold text-text-main">
+                <p className="font-body text-text-main text-[17px] leading-[25.5px] font-bold">
                   {wish.name}
                 </p>
-                <p className="mt-1 font-body text-[16px] leading-[24px] font-medium text-text-main">
+                <p className="font-body text-text-main mt-1 text-[16px] leading-[24px] font-medium">
                   {wish.message}
                 </p>
-                <p className="mt-1 font-body text-[13.5px] leading-[20.3px] font-normal text-text-muted">
+                <p className="font-body text-text-muted mt-1 text-[13.5px] leading-[20.3px] font-normal">
                   {stamp(wish.created_at)}
                 </p>
               </li>

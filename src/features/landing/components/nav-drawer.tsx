@@ -9,12 +9,6 @@ type Props = {
   onOpenChange: (open: boolean) => void;
 };
 
-/**
- * Anchor navigation drawer. The reference renders it as a dark #2C3F4E panel with
- * the couple lockup on top, right-aligned letter-spaced Marcellus links separated
- * by hairline rules, and the Invitato credit block at the bottom; closing happens
- * through the floating circular control, the backdrop, or Escape.
- */
 export function NavDrawer({ open, onOpenChange }: Props) {
   const { t } = useInvitation();
 
@@ -30,10 +24,8 @@ export function NavDrawer({ open, onOpenChange }: Props) {
   if (!open) return null;
 
   const links = [
-    { id: "access-card", label: t.nav.accessCard },
     { id: "groom-bride", label: t.nav.groomBride },
     { id: "wedding-details", label: t.nav.weddingDetails },
-    { id: "rsvp", label: t.nav.rsvp },
     { id: "live-streaming", label: t.nav.liveStreaming },
     { id: "wedding-gift", label: t.nav.weddingGift },
   ];
@@ -41,7 +33,7 @@ export function NavDrawer({ open, onOpenChange }: Props) {
   return (
     <div className="fixed inset-0 z-[var(--z-portal)]">
       <div
-        className="absolute inset-0 bg-bg-overlay/50"
+        className="bg-bg-overlay/50 absolute inset-0"
         onClick={() => onOpenChange(false)}
         aria-hidden
       />
@@ -50,23 +42,23 @@ export function NavDrawer({ open, onOpenChange }: Props) {
         role="dialog"
         aria-modal="true"
         aria-label={t.a11y.openMenu}
-        className="absolute inset-y-0 left-0 flex w-[354px] max-w-[85vw] flex-col bg-brand px-12 pt-[120px] pb-10 text-text-alt shadow-2xl"
+        className="bg-brand text-text-alt absolute inset-y-0 right-0 flex w-[500px] max-w-full flex-col px-12 pt-[100px] pb-10 shadow-2xl"
       >
-        <p className="text-center font-heading text-[30px] leading-[36px] tracking-[1px] uppercase">
+        <p className="font-heading text-right text-[30px] leading-[36px] tracking-[1px] uppercase">
           {wedding.groom.short}
-          <span className="mx-2 font-script text-[36px] leading-[42px] normal-case">
+          <span className="font-script mx-2 text-[36px] leading-[42px] normal-case">
             and
           </span>
           {wedding.bride.short}
         </p>
 
-        <ul className="mt-14 flex flex-1 flex-col">
+        <ul className="mt-12 flex flex-1 flex-col">
           {links.map((link) => (
             <li key={link.id}>
               <a
                 href={`#${link.id}`}
                 onClick={() => onOpenChange(false)}
-                className="block cursor-pointer border-b border-text-alt/40 py-7 text-right font-heading text-[20px] leading-[24px] tracking-[3px] transition-opacity duration-200 hover:opacity-75"
+                className="border-text-alt/40 font-heading block cursor-pointer border-b py-6 text-right text-[20px] leading-[24px] tracking-[3px] transition-opacity duration-200 hover:opacity-75"
               >
                 {link.label}
               </a>
@@ -74,7 +66,7 @@ export function NavDrawer({ open, onOpenChange }: Props) {
           ))}
         </ul>
 
-        <div className="mt-8 text-center font-body text-[13px] leading-[21px] font-medium">
+        <div className="font-body mt-8 text-right text-[13px] leading-[21px] font-medium opacity-80">
           <p>Created with Love by Invitato</p>
           <p>
             2026 {wedding.groom.short} &amp; {wedding.bride.short}

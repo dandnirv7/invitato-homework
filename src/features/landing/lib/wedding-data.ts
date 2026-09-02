@@ -1,8 +1,3 @@
-/**
- * Language-invariant wedding data, transcribed from the reference template
- * (scrape/data.json, confirmed against the live DOM in
- * scrape/live/audit/sections-deep.json and reference-copy.json).
- */
 export const wedding = {
   groom: {
     full: "Ricky Ravanelli, S.E.",
@@ -17,14 +12,10 @@ export const wedding = {
     photo: "/assets/bride-portrait.jpg",
   },
 
-  // The honourific is language-dependent ("Mr."/"Mrs." vs "Bapak"/"Ibu") and
-  // lives in the dictionary; only the names are stored here.
   parents: { father: "Parent Man", mother: "Parent Lady" },
 
   hashtag: "#RickyFellinlove",
 
-  // The reference counts down to this epoch (≈2026-12-24) even though its printed
-  // date text still reads 2024. Both are reproduced as-is so the numbers match.
   akadEpoch: 1798160400,
   receptionEpoch: 1798167600,
 
@@ -49,25 +40,22 @@ export const wedding = {
     },
   },
 
-  /**
-   * Section 4's entrance card. `logo` is Invitato's wordmark (`qrinvitato-*.png`),
-   * NOT a QR code — the reference renders no QR element at all, matching its own
-   * footnote about the Digital Guestbook package.
-   */
   accessCard: {
     cover: "/assets/qr-cover.jpg",
     logo: "/assets/qr-code.png",
     information: "Vendor",
     seats: 5,
-    // This project has no e-ticket route; the reference's own endpoint is used so
-    // the button resolves instead of 404ing. See docs/CLONE-AUDIT.md deviations.
     downloadBase: "https://invitato.net/template-rickyfelly/e-ticket/",
     code: "D3EC9693640",
   },
 
   gift: {
     banks: [
-      { name: "Bank BCA", account: "11223344", holder: "Ricky Ravanelli, S.E." },
+      {
+        name: "Bank BCA",
+        account: "11223344",
+        holder: "Ricky Ravanelli, S.E.",
+      },
       {
         name: "Bank BRI",
         account: "44332211",
@@ -84,7 +72,6 @@ export const wedding = {
     liveId: "y3MLiFHAf4w",
   },
 
-  /** Countdown-section backdrop. */
   gallery: [
     "/assets/gallery-main.jpg",
     "/assets/gallery-1.jpg",
@@ -94,7 +81,6 @@ export const wedding = {
     "/assets/gallery-5.jpg",
   ],
 
-  /** Section 6 carousel: one main slide plus five thumbnails, as on the reference. */
   portraits: [
     "/assets/gallery-1.jpg",
     "/assets/gallery-2.jpg",
@@ -111,7 +97,6 @@ export const wedding = {
     songUrl: "https://youtu.be/tfg_jftGPYc?si=KxpCzz8vz8AhNsuz",
   },
 
-  /** Option list of the reference's country-code `<select>`, in its own order. */
   countryCodes: [
     { name: "Australia", code: "61" },
     { name: "Brunei Darussalam", code: "673" },

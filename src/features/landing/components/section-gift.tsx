@@ -1,13 +1,21 @@
 "use client";
 
+import Image from "next/image";
 import { Copy, Check, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useInvitation } from "../i18n/invitation-provider";
 import { wedding } from "../lib/wedding-data";
 import { Reveal } from "./reveal";
-import { templateButtonClass } from "./template-button";
 
-function CopyButton({ value, label, doneLabel }: { value: string; label: string; doneLabel: string }) {
+function CopyButton({
+  value,
+  label,
+  doneLabel,
+}: {
+  value: string;
+  label: string;
+  doneLabel: string;
+}) {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
@@ -20,23 +28,22 @@ function CopyButton({ value, label, doneLabel }: { value: string; label: string;
     <button
       type="button"
       aria-label={`${label}: ${value}`}
-      className="inline-flex shrink-0 cursor-pointer items-center gap-1 rounded-[5px] border border-brand px-2 py-1 font-body text-[14px] leading-[16.8px] font-medium text-brand transition-opacity duration-200 hover:opacity-75"
+      className="border-brand font-body text-brand inline-flex shrink-0 cursor-pointer items-center gap-1 rounded-[5px] border px-2 py-1 text-[14px] leading-[16.8px] font-medium transition-opacity duration-200 hover:opacity-75"
       onClick={async () => {
         await navigator.clipboard.writeText(value);
         setCopied(true);
       }}
     >
-      {copied ? <Check className="size-3.5" aria-hidden /> : <Copy className="size-3.5" aria-hidden />}
+      {copied ? (
+        <Check className="size-3.5" aria-hidden />
+      ) : (
+        <Copy className="size-3.5" aria-hidden />
+      )}
       {copied ? doneLabel : label}
     </button>
   );
 }
 
-/**
- * Section 8. Measured on the live reference: h 451.5 at BOTH widths, bg #D5DADE,
- * padding 32px 0, content 400px wide. Title y=114, body y=162 (h 85.5),
- * "Send Gift" y=301.5 — which leaves 118px of trailing space inside the section.
- */
 export function SectionGift() {
   const { t } = useInvitation();
   const [open, setOpen] = useState(false);
@@ -53,10 +60,28 @@ export function SectionGift() {
   return (
     <section
       id="wedding-gift"
-      className="flex flex-col items-center bg-bg-primary pt-8 pb-[118px] text-center"
+      className="relative flex flex-col items-center overflow-hidden bg-bg-primary pt-8 pb-[118px] text-center"
     >
+      <div
+        className="pointer-events-none absolute top-6 -left-4 h-16 w-8 rounded-r-full bg-brand"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute top-6 -right-4 h-16 w-8 rounded-l-full bg-brand"
+        aria-hidden
+      />
+
       <Reveal className="flex w-[80%] max-w-[400px] flex-col items-center text-center">
-        <h2 className="mt-[82px] w-full font-heading text-h1 leading-[32px] text-text-muted uppercase">
+        <Image
+          src="/assets/love-story-ornament.svg"
+          alt=""
+          width={24}
+          height={24}
+          aria-hidden
+          className="mx-auto mt-4 h-6 w-6"
+        />
+
+        <h2 className="mt-[50px] w-full font-heading text-h1 leading-[32px] text-text-muted uppercase">
           {t.gift.title}
         </h2>
 
@@ -68,7 +93,7 @@ export function SectionGift() {
           type="button"
           aria-haspopup="dialog"
           aria-expanded={open}
-          className={`${templateButtonClass} mt-[54px]`}
+          className="mt-[54px] inline-flex h-8 cursor-pointer items-center justify-center rounded-[6px] bg-[#6D7275] px-6 py-2 font-body text-[18px] leading-[21.6px] font-medium text-white transition-opacity duration-200 hover:opacity-85"
           onClick={() => setOpen(true)}
         >
           {t.gift.cta}
@@ -78,7 +103,7 @@ export function SectionGift() {
       {open ? (
         <div className="fixed inset-0 z-[var(--z-portal)] flex items-end justify-center">
           <div
-            className="absolute inset-0 bg-bg-overlay/50"
+            className="bg-bg-overlay/50 absolute inset-0"
             onClick={() => setOpen(false)}
             aria-hidden
           />
@@ -86,22 +111,22 @@ export function SectionGift() {
             role="dialog"
             aria-modal="true"
             aria-label={t.gift.title}
-            className="relative max-h-[85dvh] w-full max-w-[500px] overflow-y-auto rounded-t-[16px] bg-bg-alt px-6 py-6 text-left shadow-2xl no-scrollbar"
+            className="bg-bg-alt no-scrollbar relative max-h-[85dvh] w-full max-w-[500px] overflow-y-auto rounded-t-[16px] px-6 py-6 text-left shadow-2xl"
           >
             <button
               type="button"
               aria-label={t.a11y.closeMenu}
-              className="absolute top-4 right-4 cursor-pointer text-text-muted transition-opacity duration-200 hover:opacity-60"
+              className="text-text-muted absolute top-4 right-4 cursor-pointer transition-opacity duration-200 hover:opacity-60"
               onClick={() => setOpen(false)}
             >
               <X className="size-5" aria-hidden />
             </button>
 
-            <h3 className="font-heading text-h3 leading-[28px] text-text-muted uppercase">
+            <h3 className="font-heading text-h3 text-text-muted leading-[28px] uppercase">
               {t.gift.title}
             </h3>
 
-            <p className="mt-4 font-body text-[17px] leading-[25.5px] font-bold text-text-main">
+            <p className="font-body text-text-main mt-4 text-[17px] leading-[25.5px] font-bold">
               {t.gift.bankAccounts}
             </p>
 
@@ -109,16 +134,16 @@ export function SectionGift() {
               {wedding.gift.banks.map((bank) => (
                 <li
                   key={bank.account}
-                  className="rounded-[8px] border border-line bg-bg-primary/40 px-4 py-3"
+                  className="border-line bg-bg-primary/40 rounded-[8px] border px-4 py-3"
                 >
-                  <p className="font-body text-[17px] leading-[25.5px] font-bold text-text-main">
+                  <p className="font-body text-text-main text-[17px] leading-[25.5px] font-bold">
                     {bank.name}
                   </p>
-                  <p className="font-body text-body leading-[28.5px] font-medium text-text-main">
+                  <p className="font-body text-body text-text-main leading-[28.5px] font-medium">
                     {bank.account}
                   </p>
                   <div className="mt-2 flex items-center justify-between gap-3">
-                    <span className="font-body text-[17px] leading-[25.5px] font-medium text-text-muted">
+                    <span className="font-body text-text-muted text-[17px] leading-[25.5px] font-medium">
                       {bank.holder}
                     </span>
                     <CopyButton
@@ -131,11 +156,11 @@ export function SectionGift() {
               ))}
             </ul>
 
-            <p className="mt-5 font-body text-[17px] leading-[25.5px] font-bold text-text-main">
+            <p className="font-body text-text-main mt-5 text-[17px] leading-[25.5px] font-bold">
               {t.gift.shipTo}
             </p>
             <div className="mt-1 flex items-start justify-between gap-3">
-              <p className="font-body text-body leading-[28.5px] font-medium text-text-main">
+              <p className="font-body text-body text-text-main leading-[28.5px] font-medium">
                 {wedding.gift.address}
               </p>
               <CopyButton

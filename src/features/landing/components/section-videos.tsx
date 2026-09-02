@@ -24,7 +24,7 @@ function VideoBlock({
     >
       <h2
         id={`${id}-title`}
-        className="w-full font-heading text-h1 leading-[32px] text-text-muted uppercase"
+        className="font-heading text-h1 text-text-muted w-full leading-[32px] uppercase"
       >
         {title}
       </h2>
@@ -38,7 +38,7 @@ function VideoBlock({
         className="mt-8 aspect-video w-full rounded-[8px] border-0 bg-black"
       />
 
-      <p className="mt-4 w-full px-3 pt-2 font-body text-body leading-[28.5px] font-medium text-text-main">
+      <p className="font-body text-body text-text-main mt-4 w-full px-3 pt-2 leading-[28.5px] font-medium">
         {t.videos.fallback}
       </p>
 
@@ -54,16 +54,11 @@ function VideoBlock({
   );
 }
 
-/**
- * Section 7. Measured on the live reference: h 1020 desktop / 978 mobile,
- * bg #D5DADE, padding 32px 0 64px. Two identical blocks of
- * title -> 400x225 iframe (radius 8) -> fallback copy -> CTA, 56px apart.
- */
 export function SectionVideos() {
   const { t } = useInvitation();
 
   return (
-    <section className="flex flex-col items-center bg-bg-primary pt-8 pb-20">
+    <section className="bg-bg-primary flex flex-col items-center pt-8 pb-20">
       <VideoBlock
         id="pre-wedding"
         title={t.videos.prewedding}

@@ -39,6 +39,9 @@ export const metadata: Metadata = {
   },
   authors: [{ name: "Invitato" }],
   keywords: ["wedding", "invitation", "ricky fellycia", "invitato"],
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export const viewport: Viewport = {
@@ -49,9 +52,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    // The reference defaults to English when no ?lang= param is present and flips
-    // <html lang> client-side when the language pill is used.
-    <html lang="en" className="h-full antialiased">
+    <html lang="en" className="h-full antialiased" suppressHydrationWarning>
       <body className="flex min-h-full flex-col">
         <script
           type="application/ld+json"

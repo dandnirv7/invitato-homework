@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Reference-site scrape and CDP audit scratch (includes headless-Chrome profile
+    // dirs full of minified cached JS). Not project source.
+    "scrape/**",
   ]),
 ]);
 

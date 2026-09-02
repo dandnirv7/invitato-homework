@@ -5,19 +5,19 @@ import { weddingEventSchema } from "@/lib/seo/schemas";
 
 const fontHeading = Marcellus({
   weight: "400",
-  variable: "--font-heading",
+  variable: "--font-heading-loaded",
   subsets: ["latin"],
 });
 
 const fontBody = Cormorant_Upright({
   weight: ["400", "500", "700"],
-  variable: "--font-body",
+  variable: "--font-body-loaded",
   subsets: ["latin"],
 });
 
 const fontScript = Great_Vibes({
   weight: "400",
-  variable: "--font-script",
+  variable: "--font-script-loaded",
   subsets: ["latin"],
 });
 
@@ -65,7 +65,11 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html
       lang="id"

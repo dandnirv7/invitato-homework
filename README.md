@@ -5,9 +5,7 @@ A public wedding invitation website inspired by the Invitato
 end-to-end product slice: polished frontend, RSVP & wishes backed by a real API and
 persistent database.
 
-> **Status: in development.** Sections marked _TBD_ are finalized once the build is
-> complete. Requirements live in [`docs/PRD.md`](docs/PRD.md); scope priorities in
-> [`docs/MVP.md`](docs/MVP.md).
+> **Live Demo:** [https://invitato-homework.vercel.app](https://invitato-homework.vercel.app) · Requirements live in [`docs/PRD.md`](docs/PRD.md); scope priorities in [`docs/MVP.md`](docs/MVP.md).
 
 ## Features
 
@@ -29,10 +27,7 @@ persistent database.
 | Styling    | Tailwind CSS v4                             |
 | Backend    | Next.js route handlers (`src/app/api`)      |
 | Database   | Supabase (Postgres) with Row Level Security |
-| Deployment | Vercel — _TBD_                              |
-
-## Getting Started
-
+| Deployment | Vercel — [https://invitato-homework.vercel.app](https://invitato-homework.vercel.app) |
 Prerequisites: Node.js 20+ and [pnpm](https://pnpm.io) 10.
 
 ```bash

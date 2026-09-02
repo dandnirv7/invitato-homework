@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
-import { cookies } from "next/headers";
+import { createClient } from "@supabase/supabase-js";
 import { wishSchema } from "@/features/landing/lib/schemas";
-import { createClient } from "@/lib/supabase/server";
 import { z } from "zod";
 
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!;
 export async function GET() {
   try {
-    const cookieStore = await cookies();
-    const supabase = createClient(cookieStore);
+    const supabase = createClient(supabaseUrl, supabaseKey);
 
     const { data, error } = await supabase
       .from("wishes")
@@ -15,14 +15,23 @@ export async function GET() {
       .order("created_at", { ascending: false });
 
     if (error) {
+      console.error("[wishes GET] supabase error", {
+        message: error.message,
+        code: error.code,
+        details: error.details,
+      });
       return NextResponse.json(
-        { error: error.message || "Gagal mengambil daftar ucapan" },
+        {
+          error: error.message || "Gagal mengambil daftar ucapan",
+          code: error.code,
+          details: error.details,
+        },
         { status: 500 },
       );
     }
 
     return NextResponse.json({ data: data || [] }, { status: 200 });
-  } catch (err: unknown) {
+  } catch {
     return NextResponse.json(
       { error: "Terjadi kesalahan pada server" },
       { status: 500 },
@@ -43,8 +52,7 @@ export async function POST(request: NextRequest) {
     }
 
     const { name, message } = result.data;
-    const cookieStore = await cookies();
-    const supabase = createClient(cookieStore);
+    const supabase = createClient(supabaseUrl, supabaseKey);
 
     const { data, error } = await supabase
       .from("wishes")
@@ -65,7 +73,7 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json({ data }, { status: 201 });
-  } catch (err: unknown) {
+  } catch {
     return NextResponse.json(
       { error: "Terjadi kesalahan pada server" },
       { status: 500 },

@@ -2,6 +2,14 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+@font-face {
+  font-family: "Boheme Floral";
+  src: url("/fonts/BohemeFloral.ttf") format("truetype");
+  font-weight: 300 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -47,20 +55,27 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 
-  /* Invitato Design Tokens (from DESIGN.md) */
+  /* Invitato Design Tokens (from 1:1 manifest & DESIGN.md) */
   --color-bg-primary: var(--bg-primary);
   --color-bg-secondary: var(--bg-secondary);
   --color-bg-alt: var(--bg-alt);
+  --color-bg-alternative: var(--bg-alternative);
   --color-bg-overlay: var(--bg-overlay);
+  --color-bg-opacity: var(--bg-opacity);
   --color-text-main: var(--text-main);
+  --color-main-color-text: var(--main-color-text);
   --color-text-muted: var(--text-muted);
+  --color-secondary-color-text: var(--secondary-color-text);
   --color-text-alt: var(--text-alt);
+  --color-alternative-color-text: var(--alternative-color-text);
   --color-accent-brand: var(--color-accent);
+  --color-main-asset: var(--main-asset);
 
   /* Fonts */
   --font-heading: var(--font-heading);
   --font-body: var(--font-body);
   --font-script: var(--font-script);
+  --font-and: var(--font-and);
 }
 
 :root {
@@ -89,15 +104,35 @@
   --chart-5: oklch(0.269 0 0);
   --radius: 0.625rem;
 
-  /* Invitato Exact Tokens */
+  /* Invitato 1:1 Exact Tokens (manifest.design_tokens) */
   --bg-primary: #d5dade;
   --bg-secondary: #737373;
   --bg-alt: #ffffff;
+  --bg-alternative: #ffffff;
   --bg-overlay: #323030;
-  --text-main: #2c3f4e;
-  --text-muted: #737373;
-  --text-alt: #fefefe;
+  --bg-opacity: #323030;
+  --main-asset: #2c3f4e;
+  --main-asset-color: #2c3f4e;
   --color-accent: #2c3f4e;
+  --text-main: #2c3f4e;
+  --main-color-text: #2c3f4e;
+  --text-muted: #737373;
+  --secondary-color-text: #737373;
+  --text-alt: #fefefe;
+  --alternative-color-text: #fefefe;
+  --font-heading: var(--font-heading-loaded, "Marcellus", serif);
+  --font-body: var(--font-body-loaded, "Cormorant Upright", serif);
+  --font-script: var(--font-script-loaded, "Boheme Floral", cursive);
+  --font-and: "Boheme Floral", var(--font-script), cursive;
+  --bg-card: #faf8f4;
+  --lightbox-bg: rgb(0 0 0 / 85%);
+  --shadow-main: 0 12px 30px rgb(44 63 78 / 18%);
+  --shadow-border:
+    0 0 0 1px rgb(0 0 0 / 6%), 0 1px 2px -1px rgb(0 0 0 / 6%),
+    0 2px 4px rgb(0 0 0 / 4%);
+  --shadow-border-hover:
+    0 0 0 1px rgb(0 0 0 / 8%), 0 1px 2px -1px rgb(0 0 0 / 8%),
+    0 2px 4px rgb(0 0 0 / 6%);
 
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
@@ -150,6 +185,17 @@
   body {
     @apply bg-bg-primary text-text-main font-body;
   }
+  html {
+    scroll-behavior: smooth;
+  }
+  ::selection {
+    background: var(--text-main);
+    color: var(--text-alt);
+  }
+  :focus-visible {
+    outline: 2px solid var(--text-main);
+    outline-offset: 3px;
+  }
   h1,
   h2,
   h3,
@@ -157,5 +203,26 @@
   h5,
   h6 {
     @apply font-heading font-normal;
+  }
+  p,
+  li,
+  figcaption,
+  blockquote {
+    text-wrap: pretty;
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+  img {
+    outline: 1px solid rgb(0 0 0 / 10%);
+    outline-offset: -1px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }

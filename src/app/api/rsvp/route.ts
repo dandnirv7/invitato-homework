@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { cookies } from "next/headers";
+import { createClient } from "@supabase/supabase-js";
 import { rsvpSchema } from "@/features/landing/lib/schemas";
-import { createClient } from "@/lib/supabase/server";
 import { z } from "zod";
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!;
 
 export async function POST(request: NextRequest) {
   try {
@@ -17,30 +19,38 @@ export async function POST(request: NextRequest) {
     }
 
     const { name, attendance, partySize } = result.data;
-    const cookieStore = await cookies();
-    const supabase = createClient(cookieStore);
-
-    const { data, error } = await supabase
-      .from("rsvps")
-      .insert([
-        {
-          name,
-          attendance,
-          party_size: partySize,
-        },
-      ])
-      .select()
-      .single();
+    const supabase = createClient(supabaseUrl, supabaseKey);
+    const { error } = await supabase.from("rsvps").insert([
+      {
+        name,
+        attendance,
+        party_size: partySize,
+      },
+    ]);
 
     if (error) {
+      console.error("[rsvp] supabase insert error", {
+        message: error.message,
+        code: error.code,
+        details: error.details,
+        hint: error.hint,
+      });
       return NextResponse.json(
-        { error: error.message || "Gagal menyimpan RSVP" },
+        {
+          error: error.message || "Gagal menyimpan RSVP",
+          code: error.code,
+          details: error.details,
+          hint: error.hint,
+        },
         { status: 500 },
       );
     }
 
-    return NextResponse.json({ data }, { status: 201 });
-  } catch (err: unknown) {
+    return NextResponse.json(
+      { data: { name, attendance, party_size: partySize } },
+      { status: 201 },
+    );
+  } catch {
     return NextResponse.json(
       { error: "Terjadi kesalahan pada server" },
       { status: 500 },

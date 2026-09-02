@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none">
+  <rect width="256" height="256" fill="white"/>
+  <!-- Top Left Position Detection Pattern -->
+  <rect x="20" y="20" width="64" height="64" rx="6" stroke="#1c1c1c" stroke-width="12" fill="white"/>
+  <rect x="36" y="36" width="32" height="32" rx="3" fill="#1c1c1c"/>
+  
+  <!-- Top Right Position Detection Pattern -->
+  <rect x="172" y="20" width="64" height="64" rx="6" stroke="#1c1c1c" stroke-width="12" fill="white"/>
+  <rect x="188" y="36" width="32" height="32" rx="3" fill="#1c1c1c"/>
+  
+  <!-- Bottom Left Position Detection Pattern -->
+  <rect x="20" y="172" width="64" height="64" rx="6" stroke="#1c1c1c" stroke-width="12" fill="white"/>
+  <rect x="36" y="188" width="32" height="32" rx="3" fill="#1c1c1c"/>
+  
+  <!-- QR Data Dots / Matrix Modules -->
+  <rect x="96" y="24" width="16" height="16" fill="#1c1c1c"/>
+  <rect x="120" y="24" width="16" height="16" fill="#1c1c1c"/>
+  <rect x="144" y="24" width="16" height="16" fill="#1c1c1c"/>
+  
+  <rect x="96" y="48" width="16" height="16" fill="#1c1c1c"/>
+  <rect x="136" y="48" width="16" height="16" fill="#1c1c1c"/>
+  
+  <rect x="104" y="72" width="16" height="16" fill="#1c1c1c"/>
+  <rect x="128" y="72" width="16" height="16" fill="#1c1c1c"/>
+  <rect x="152" y="72" width="16" height="16" fill="#1c1c1c"/>
+
+  <!-- Timing Patterns -->
+  <rect x="44" y="96" width="16" height="16" fill="#1c1c1c"/>
+  <rect x="68" y="96" width="16" height="16" fill="#1c1c1c"/>
+  <rect x="96" y="96" width="16" height="16" fill="#1c1c1c"/>
+  <rect x="120" y="96" width="16" height="16" fill="#1c1c1c"/>
+  <rect x="144" y="96" width="16" height="16" fill="#1c1c1c"/>
+  <rect x="172" y="96" width="16" height="16" fill="#1c1c1c"/>
+  <rect x="196" y="96" width="16" height="16" fill="#1c1c1c"/>
+
+  <rect x="96" y="120" width="16" height="16" fill="#1c1c1c"/>
+  <rect x="44" y="120" width="16" height="16" fill="#1c1c1c"/>
+  <rect x="144" y="120" width="16" height="16" fill="#1c1c1c"/>
+  <rect x="168" y="120" width="16" height="16" fill="#1c1c1c"/>
+  <rect x="216" y="120" width="16" height="16" fill="#1c1c1c"/>
+
+  <rect x="24" y="144" width="16" height="16" fill="#1c1c1c"/>
+  <rect x="72" y="144" width="16" height="16" fill="#1c1c1c"/>
+  <rect x="112" y="144" width="16" height="16" fill="#1c1c1c"/>
+  <rect x="136" y="144" width="16" height="16" fill="#1c1c1c"/>
+  <rect x="184" y="144" width="16" height="16" fill="#1c1c1c"/>
+  <rect x="208" y="144" width="16" height="16" fill="#1c1c1c"/>
+
+  <!-- Bottom Right Matrix -->
+  <rect x="96" y="168" width="16" height="16" fill="#1c1c1c"/>
+  <rect x="120" y="168" width="16" height="16" fill="#1c1c1c"/>
+  <rect x="168" y="168" width="16" height="16" fill="#1c1c1c"/>
+  <rect x="216" y="168" width="16" height="16" fill="#1c1c1c"/>
+
+  <rect x="112" y="192" width="16" height="16" fill="#1c1c1c"/>
+  <rect x="144" y="192" width="16" height="16" fill="#1c1c1c"/>
+  <rect x="184" y="192" width="16" height="16" fill="#1c1c1c"/>
+
+  <rect x="96" y="216" width="16" height="16" fill="#1c1c1c"/>
+  <rect x="136" y="216" width="16" height="16" fill="#1c1c1c"/>
+  <rect x="168" y="216" width="16" height="16" fill="#1c1c1c"/>
+  <rect x="208" y="216" width="16" height="16" fill="#1c1c1c"/>
+</svg>

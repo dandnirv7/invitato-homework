@@ -9,12 +9,11 @@ export const rsvpSchema = z.object({
   attendance: z.enum(["attending", "not_attending"], {
     message: "Pilih status kehadiran",
   }),
-  partySize: z.coerce
+  partySize: z
     .number()
     .int()
     .min(1, "Jumlah orang minimal 1")
-    .max(10, "Jumlah orang maksimal 10")
-    .default(1),
+    .max(10, "Jumlah orang maksimal 10"),
 });
 
 export const wishSchema = z.object({

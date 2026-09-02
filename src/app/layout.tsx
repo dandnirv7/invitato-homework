@@ -1,25 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { Marcellus, Cormorant_Upright, Great_Vibes } from "next/font/google";
+import "./fonts.css";
 import "./globals.css";
 import { weddingEventSchema } from "@/lib/seo/schemas";
-
-const fontHeading = Marcellus({
-  weight: "400",
-  variable: "--font-heading",
-  subsets: ["latin"],
-});
-
-const fontBody = Cormorant_Upright({
-  weight: ["400", "500", "700"],
-  variable: "--font-body",
-  subsets: ["latin"],
-});
-
-const fontScript = Great_Vibes({
-  weight: "400",
-  variable: "--font-script",
-  subsets: ["latin"],
-});
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
@@ -67,10 +49,9 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="id"
-      className={`${fontHeading.variable} ${fontBody.variable} ${fontScript.variable} h-full antialiased`}
-    >
+    // The reference defaults to English when no ?lang= param is present and flips
+    // <html lang> client-side when the language pill is used.
+    <html lang="en" className="h-full antialiased">
       <body className="flex min-h-full flex-col">
         <script
           type="application/ld+json"

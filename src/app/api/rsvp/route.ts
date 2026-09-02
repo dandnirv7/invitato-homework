@@ -16,7 +16,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { name, attendance, partySize } = result.data;
+    const {
+      name,
+      attendance,
+      partySize,
+      countryCode,
+      phoneNumber,
+      address,
+      email,
+    } = result.data;
     const cookieStore = await cookies();
     const supabase = createClient(cookieStore);
 
@@ -26,7 +34,11 @@ export async function POST(request: NextRequest) {
         {
           name,
           attendance,
-          party_size: partySize,
+          party_size: partySize ?? 1,
+          country_code: countryCode ?? null,
+          phone_number: phoneNumber ?? null,
+          address: address ?? null,
+          email: email ?? null,
         },
       ])
       .select()

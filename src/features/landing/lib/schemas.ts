@@ -9,12 +9,17 @@ export const rsvpSchema = z.object({
   attendance: z.enum(["attending", "not_attending"], {
     message: "Pilih status kehadiran",
   }),
-  partySize: z.coerce
-    .number()
+  partySize: z.number()
     .int()
     .min(1, "Jumlah orang minimal 1")
     .max(10, "Jumlah orang maksimal 10")
-    .default(1),
+    .optional(),
+  // Contact fields collected by the reference RSVP form (section 5). Optional so
+  // the PRD's original name/attendance/partySize contract still validates alone.
+  countryCode: z.string().trim().max(8).optional(),
+  phoneNumber: z.string().trim().max(24).optional(),
+  address: z.string().trim().max(200).optional(),
+  email: z.union([z.literal(""), z.email().max(100)]).optional(),
 });
 
 export const wishSchema = z.object({

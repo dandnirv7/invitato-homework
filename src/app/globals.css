@@ -4,12 +4,50 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Breakpoints mirror the reference's Chakra UI theme (sm480 md768 lg992 xl1280 2xl1536),
+   NOT Tailwind's defaults — the ≥1280 split view depends on xl landing exactly on 1280. */
 @theme inline {
+  --breakpoint-sm: 30rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 62rem;
+  --breakpoint-xl: 80rem;
+  --breakpoint-2xl: 96rem;
+
+  /* Faces come from src/app/fonts.css (self-hosted, same files the reference loads). */
+  --font-sans: "Cormorant Upright", Georgia, serif;
+  --font-mono: var(--font-geist-mono);
+  --font-heading: "Marcellus", Georgia, serif;
+  --font-body: "Cormorant Upright", Georgia, serif;
+  --font-script: "Boheme Floral", cursive;
+  --font-micro: "Montserrat", system-ui, sans-serif;
+
+  /* Type scale read off the live reference. */
+  --text-h1: 32px;
+  --text-h1--line-height: 1.25;
+  --text-h2: 30px;
+  --text-h2--line-height: 1.25;
+  --text-h3: 28px;
+  --text-h3--line-height: 1.3;
+  --text-h4: 24px;
+  --text-h4--line-height: 1.3;
+  --text-h5: 20px;
+  --text-h5--line-height: 1.35;
+  --text-h6: 19px;
+  --text-h6--line-height: 1.4;
+  --text-body: 19px;
+  --text-body--line-height: 28.5px;
+  --text-body-2: 17px;
+  --text-body-2--line-height: 25.5px;
+  --text-caption: 16px;
+  --text-small: 14px;
+  --text-micro: 13.5px;
+  --text-and: 66px;
+  --text-and--line-height: 1;
+  --text-count: 54px;
+  --text-count--line-height: 81px;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -47,7 +85,7 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 
-  /* Invitato Design Tokens (from DESIGN.md) */
+  /* Invitato palette (see docs/CLONE-AUDIT.md §2). */
   --color-bg-primary: var(--bg-primary);
   --color-bg-secondary: var(--bg-secondary);
   --color-bg-alt: var(--bg-alt);
@@ -55,12 +93,9 @@
   --color-text-main: var(--text-main);
   --color-text-muted: var(--text-muted);
   --color-text-alt: var(--text-alt);
-  --color-accent-brand: var(--color-accent);
-
-  /* Fonts */
-  --font-heading: var(--font-heading);
-  --font-body: var(--font-body);
-  --font-script: var(--font-script);
+  --color-brand: var(--brand);
+  --color-text-default: var(--text-default);
+  --color-line: var(--line);
 }
 
 :root {
@@ -89,7 +124,7 @@
   --chart-5: oklch(0.269 0 0);
   --radius: 0.625rem;
 
-  /* Invitato Exact Tokens */
+  /* Invitato exact tokens */
   --bg-primary: #d5dade;
   --bg-secondary: #737373;
   --bg-alt: #ffffff;
@@ -97,7 +132,29 @@
   --text-main: #2c3f4e;
   --text-muted: #737373;
   --text-alt: #fefefe;
-  --color-accent: #2c3f4e;
+  --brand: #2c3f4e;
+  --text-default: #1a202c; /* Chakra gray.800, the reference's body default */
+  --line: #e2e8f0; /* Chakra gray.200, hairline borders */
+
+  /* Layout: the invitation column is 500px from md up, full width below. */
+  --column-width: 500px;
+
+  /* z-index ladder measured on the reference */
+  --z-backdrop: 2;
+  --z-gallery-icon: 4;
+  --z-lang: 99;
+  --z-floating: 999;
+  --z-lightbox: 1000;
+  --z-portal: 5500;
+
+  /* Radii the reference actually uses */
+  --radius-invitato-xs: 3px;
+  --radius-invitato-sm: 5px;
+  --radius-invitato-md: 6px;
+  --radius-invitato-lg: 8px;
+  --radius-invitato-xl: 16px;
+  --radius-invitato-2xl: 24px;
+  --radius-invitato-3xl: 25px;
 
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
@@ -131,7 +188,7 @@
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
+  --chart-4: oklch(0.269 0 0);
   --chart-5: oklch(0.269 0 0);
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
@@ -143,19 +200,96 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* The cover's bouncing arrow: reference keyframe is `50% { transform: translateY(20px) }`,
+   3s ease-in-out infinite. */
+@keyframes move-up-down {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(20px);
+  }
+}
+
+@keyframes heart-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+@utility animate-cover-arrow {
+  animation: move-up-down 3s ease-in-out infinite;
+}
+
+@utility animate-heart {
+  animation: heart-pulse 1s ease-in-out infinite;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-bg-primary text-text-main font-body;
+
+  html {
+    /* Reference uses scroll-behavior: auto — anchor jumps are instant, not smooth. */
+    scroll-behavior: auto;
   }
+
+  body {
+    @apply bg-bg-primary font-body text-text-main;
+  }
+
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    @apply font-heading font-normal;
+    @apply font-heading font-normal uppercase;
+    letter-spacing: 1px;
   }
+
+  /* Only the document's own vertical scrollbar should be visible; every nested
+     scroll region (gallery rails, drawers, wish lists) hides its scrollbars. */
+  :not(html) > * {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    background: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* The reference never scrolls horizontally; clip (not hidden) so
+   vertical ornament overflow above sections stays visible. */
+html,
+body {
+  overflow-x: clip;
 }

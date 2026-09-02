@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { Invitation } from "@/features/landing/components/invitation";
+import { resolveLang } from "@/features/landing/i18n/dictionary";
+import { InvitationProvider } from "@/features/landing/i18n/invitation-provider";
 
 type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -24,11 +27,15 @@ export async function generateMetadata({
   };
 }
 
-export default async function LandingPage() {
+export default async function LandingPage({ searchParams }: Props) {
+  const resolvedParams = await searchParams;
+  const guestName =
+    typeof resolvedParams.to === "string" ? resolvedParams.to : "";
+  const lang = resolveLang(resolvedParams.lang);
+
   return (
-    <main className="bg-bg-primary text-text-main flex min-h-screen flex-col items-center justify-center">
-      <h1 className="font-heading text-4xl">The Wedding of Ricky & Fellycia</h1>
-      <p className="font-body text-text-muted mt-4">Sedang dibangun...</p>
-    </main>
+    <InvitationProvider initialLang={lang} guestName={guestName}>
+      <Invitation />
+    </InvitationProvider>
   );
 }
